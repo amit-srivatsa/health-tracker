@@ -43,6 +43,8 @@ List each distinct food or drink you can see as its own item. Estimate the porti
 
 The user's saved foods are listed below with values per 100 g or ml. When an item is clearly one of them, set food_id to its id and compute from its values. Otherwise set food_id to an empty string and use typical values for that dish as it is usually home-cooked, including cooking oil.
 
+The user may add notes with weights, ingredients, cooking method or how much they ate. Treat what they state as more reliable than your visual estimate, and use it to adjust portions and add items the photo does not show.
+
 If the photo shows a nutrition label rather than a plate, use the label's values per 100 g or ml with a typical single serving unless the label states one.
 
 Use "note" for one short sentence on the biggest uncertainty in the estimate. If the photo shows no food, return no items and say so in the note.`;
@@ -68,7 +70,7 @@ async function toBase64Jpeg(blob) {
 // Plain-language reasons the UI can show.
 export class ReadError extends Error {}
 
-export async function readMeal(blob, meal, foods) {
+export async function readMeal(blob, meal, foods, note) {
   const apiKey = await getKey();
   if (!apiKey) throw new ReadError('Add your Claude API key in Settings first.');
   const client = new Anthropic({ apiKey, dangerouslyAllowBrowser: true, maxRetries: 1 });
@@ -85,7 +87,7 @@ export async function readMeal(blob, meal, foods) {
         role: 'user',
         content: [
           { type: 'image', source: { type: 'base64', media_type: 'image/jpeg', data: await toBase64Jpeg(blob) } },
-          { type: 'text', text: 'This is my ' + meal + '. Log what is on it.' },
+          { type: 'text', text: 'This is my ' + meal + '. Log what is on it.' + (note ? '\n\nMy notes about this meal:\n' + note : '') },
         ],
       }],
     });

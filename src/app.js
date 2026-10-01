@@ -133,7 +133,7 @@ async function addPhoto(file){
     photoUrls[id]=URL.createObjectURL(blob);
     if(t.kind!=='progress')state.open[t.kind]=true;
     mutateDay(t.date,x=>{x.photos=(x.photos||[]).concat({id:id,kind:t.kind,name:name})});
-    if(t.kind!=='progress'&&state.hasKey)readPhoto(t.date,id);
+    if(t.kind!=='progress'&&state.hasKey)openSheet({mode:'photonote',date:t.date,photoId:id});
     else toast(t.kind==='progress'||state.hasKey?'Photo added':'Photo saved. Add a Claude API key in Settings to log calories from photos.');
   }catch(e){toast('Could not read that photo. Try another one.')}
 }
@@ -163,7 +163,7 @@ async function readPhoto(date,id){
     const blob=await photoBlob(p);
     if(!blob)throw new ai.ReadError('This photo is not on this phone yet. Sync, then try again.');
     const mealName=(MEALS.find(m=>m[0]===p.kind)||[0,'meal'])[1].toLowerCase();
-    const res=await ai.readMeal(blob,mealName,state.foods);
+    const res=await ai.readMeal(blob,mealName,state.foods,p.note||'');
     const items=res.items.filter(it=>it&&it.name&&isFinite(it.kcal)&&it.kcal>=0);
     if(!items.length){setPhotoAi(date,id,'none');toast(res.note||'No food found in that photo.');return}
     const added=items.map(it=>({id:uid(),meal:p.kind,foodId:it.food_id&&state.foods[it.food_id]?it.food_id:null,name:String(it.name).slice(0,60),amount:r1(nz(it.amount)),unit:it.unit==='ml'?'ml':'g',kcal:r1(nz(it.kcal)),p:r1(nz(it.protein_g)),c:r1(nz(it.carbs_g)),f:r1(nz(it.fat_g)),fi:r1(nz(it.fiber_g)),photoId:id}));
@@ -562,12 +562,15 @@ function numField(id,label,val,extra){return '<div class="field"><label for="'+i
 
 function sheetHtml(){
   const s=state.sheet;
-  const title=s.mode==='settings'?'Settings':s.mode==='new'?(s.editId?'Edit food':'New food'):s.mode==='quick'?'Quick add':'Add food';
+  const title=s.mode==='photonote'?'Meal photo':s.mode==='settings'?'Settings':s.mode==='new'?(s.editId?'Edit food':'New food'):s.mode==='quick'?'Quick add':'Add food';
   let h='<div class="scrim" data-act="scrim"><div class="sheet" role="dialog" aria-modal="true" aria-label="'+title+'"><div class="shead"><h2>'+title+'</h2><button class="x" data-act="closesheet" aria-label="Close">×</button></div>';
   if(s.fromAdd&&!s.editId){
     h+='<div class="seg">'+[['lib','From foods'],['quick','Quick add'],['new','New food']].map(m=>'<button type="button" data-act="smode" data-mode="'+m[0]+'" aria-pressed="'+(s.mode===m[0])+'">'+m[1]+'</button>').join('')+'</div>';
   }
-  if(s.mode==='settings'){
+  if(s.mode==='photonote'){
+    const ph=(getDay(s.date).photos||[]).find(x=>x.id===s.photoId)||{};
+    h+='<form class="stackf" data-submit="readwithnote"><div class="notephoto"><img data-photo="'+esc(s.photoId)+'" data-name="'+esc(ph.name||'')+'" alt="Meal photo"></div><div class="field"><label for="pnote">Anything Claude should know? Optional.</label><textarea id="pnote" rows="3" maxlength="500" placeholder="200 g cooked rice, dal with 1 tsp ghee, half the roti is left">'+esc(ph.note||'')+'</textarea></div><div class="actions"><button class="btn" type="submit">Read photo</button><button class="link" type="button" data-act="closesheet">Not now</button></div><p class="cap" style="margin:0">Weights and ingredients you type here count for more than what Claude sees.</p></form>';
+  }else if(s.mode==='settings'){
     h+=settingsHtml();
   }else if(s.mode==='lib'){
     h+=mealSelect(s.meal)+'<div id="sFind" class="stack" style="gap:12px"><div class="field"><label for="sSearch">Search your foods</label><input id="sSearch" type="search" autocomplete="off"></div><div id="sResults" class="results"></div></div><div id="sPick" hidden></div>';
@@ -607,6 +610,7 @@ function renderSheet(){
   el.hidden=false;
   el.innerHTML=sheetHtml();
   if(s.mode==='lib')updateLib();
+  if(s.mode==='photonote')hydratePhotos();
 }
 function resultsHtml(q){
   const list=foodMatches(q);
@@ -733,7 +737,11 @@ function act(name,el){
       if(!/^sk-ant-[A-Za-z0-9_-]{20,}$/.test(k)){toast('That does not look like a Claude API key (it starts with sk-ant-).');break}
       ai.setKey(k).then(()=>{state.hasKey=true;renderSheet();renderMain();toast('Key saved on this phone')});break}
     case 'removekey':ai.setKey('').then(()=>{state.hasKey=false;renderSheet();renderMain();toast('Key removed from this phone')});break;
-    case 'readphoto':readPhoto(state.date,d.id);break;
+    case 'readphoto':openSheet({mode:'photonote',date:state.date,photoId:d.id});break;
+    case 'readwithnote':{
+      const sh=state.sheet,note=gv('pnote').trim().slice(0,500);
+      mutateDay(sh.date,x=>{x.photos=(x.photos||[]).map(y=>y.id===sh.photoId?Object.assign({},y,{note:note||undefined}):y)});
+      closeSheet();readPhoto(sh.date,sh.photoId);break}
     case 'import':$('importInput').click();break;
     case 'pickavatar':$('avatarInput').click();break;
     case 'removeavatar':setSetting('avatar',null);renderHeader();renderSheet();toast('Picture removed');break;
