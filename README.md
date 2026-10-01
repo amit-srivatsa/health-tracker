@@ -22,7 +22,7 @@ A private, installable tracker for calories, macros, water, workouts, sleep, wei
 
   Two devices can share the same Drive: each record carries a timestamp and the newer copy wins.
 - **Photos** are shrunk on the phone (max 1600 px) and re-encoded, which also strips EXIF data such as GPS location.
-- **Calories from a photo (optional).** Paste your own Claude API key in Settings and every meal photo is read by Claude (`claude-opus-5-5`), which adds each food with its portion, calories and macros to that meal. One tap undoes it. It prefers your saved foods and reads nutrition labels.
+- **Calories from a photo (optional).** Paste your own Claude API key in Settings and every meal photo is read by Claude (`claude-opus-5-5`), which adds each food with its portion, calories and macros to that meal. One tap undoes it. It prefers your saved foods and reads nutrition labels. Before it reads, you can add a short note ("200 g rice, 1 tsp ghee"), and Claude trusts your note over its own estimate.
 - **Backup.** Settings > Export all saves one JSON file. Import brings it back.
 
 ## Privacy and security
