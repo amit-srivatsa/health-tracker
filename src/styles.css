@@ -130,12 +130,27 @@ small{font-size:13px;color:var(--muted)}
 .legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px}
 
 /* macro pills */
-.macros{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px}
-.mp{display:flex;flex-direction:column;align-items:center;gap:8px}
-.mp .t{width:100%;max-width:58px;height:150px;border-radius:999px;background:var(--tile);position:relative;overflow:hidden}
-.mp .f{position:absolute;left:0;right:0;bottom:0;background:var(--green);border-radius:999px;display:flex;justify-content:center;padding-top:5px}
-.mp .v{width:calc(100% - 10px);aspect-ratio:1;border-radius:50%;background:var(--surface);border:3px solid var(--green-deep);display:grid;place-items:center;font-size:12px;font-weight:700;font-variant-numeric:tabular-nums}
-.mp .n{font-size:13px;font-weight:600;color:var(--muted)}
+.macros{display:flex;flex-direction:column;gap:14px}
+.mb .mrow{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:6px}
+.mb .n{font-weight:600}
+.mb .v{font-variant-numeric:tabular-nums;text-align:right}
+.mb .v small{color:var(--muted);font-size:13px}
+.mb .bar{height:6px;border-radius:999px;background:var(--tile);overflow:hidden}
+.mb .bar i{display:block;height:100%;border-radius:999px;background:var(--green-deep)}
+.mb.p .bar i{background:var(--blue-deep)}
+.mb.f .bar i{background:var(--yellow-deep)}
+.meal .more{margin-top:12px;width:100%;min-height:40px;display:flex;align-items:center;justify-content:center;gap:6px;border:0;border-radius:999px;background:rgba(255,255,255,.55);color:inherit;font-weight:600;font-size:14px;cursor:pointer}
+.meal .more .chev{display:inline-flex;width:18px;height:18px}
+.meal .more .chev.up{transform:rotate(180deg)}
+.meal .more svg{width:18px;height:18px}
+.weigh .wform{display:flex;align-items:flex-end;gap:10px;margin-top:4px}
+.weigh .wform .field{flex:1;min-width:0}
+.weigh .wdone{display:flex;align-items:center;gap:12px;margin-top:4px}
+.weigh .wdone>div{flex:1}
+.weigh .wdone b{display:block;font-family:var(--font-display);font-size:22px}
+.weigh .wdone small{color:var(--good);font-weight:600;font-size:14px}
+.weigh .ok{width:36px;height:36px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-weight:800;color:var(--on-pastel)}
+.weigh .photos{margin-top:12px}
 
 /* meals */
 .meal .mh{display:flex;align-items:center;gap:12px}
@@ -232,7 +247,7 @@ form.stackf{display:flex;flex-direction:column;gap:12px}
 
 .toast{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(88px + env(safe-area-inset-bottom,0px));background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;z-index:30;display:flex;gap:14px;align-items:center;max-width:calc(100% - 32px);font-size:15px}
 .toast button{background:none;border:0;color:var(--bg);text-decoration:underline;font-weight:700;padding:4px}
-@media (prefers-reduced-motion:no-preference){.ring .fill,.wbar i b,.glass i,.mp .f{transition:all .35s ease}}
+@media (prefers-reduced-motion:no-preference){.ring .fill,.wbar i b,.glass i,.mb .bar i{transition:all .35s ease}}
 @media (max-width:380px){.progress .pct{font-size:44px}.ring{width:118px;height:118px}.wbars{gap:6px}}
 
 /* sync status, photos, settings (added for the installable version) */

@@ -20,6 +20,7 @@ const plural=(l,n)=>n===1?l:(/s$/.test(l)?l:l+'s');
 const litres=ml=>nf2.format(ml/1000);
 
 const ICON={
+  chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>',
   bowl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M9 7c0-1.5 1-2 1-3.5M13 7c0-1.5 1-2 1-3.5"/></svg>',
   moon:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14.5A7.5 7.5 0 0 1 9.5 5a7.5 7.5 0 1 0 9.5 9.5z"/></svg>',
@@ -47,7 +48,7 @@ function fmtShort(s){return parse(s).toLocaleDateString('en-GB',{day:'numeric',m
 function fmtDur(m){return Math.floor(m/60)+'h '+(m%60)+'m'}
 function monday(s){const d=parse(s),k=(d.getDay()+6)%7;return addDays(s,-k)}
 
-const state={foods:{},days:{},settings:{},loaded:{foods:false,days:false,settings:false},view:'today',date:todayStr(),demo:false,sheet:null,goalEdit:false,waterEdit:false,confirmDel:null,foodQuery:'',draft:{},undo:null,sync:{status:'idle',pending:0,last:null,error:null},photoTarget:null,viewer:null,hasKey:false};
+const state={foods:{},days:{},settings:{},loaded:{foods:false,days:false,settings:false},view:'today',date:todayStr(),demo:false,sheet:null,goalEdit:false,waterEdit:false,confirmDel:null,foodQuery:'',draft:{},undo:null,sync:{status:'idle',pending:0,last:null,error:null},photoTarget:null,viewer:null,hasKey:false,open:{},weightEdit:false};
 
 const emptyDay=date=>({date:date,entries:[],workouts:[],weight:null,sleep:null,water:0,photos:[]});
 const getDay=date=>{const d=state.days[date];if(!d)return emptyDay(date);return Object.assign({entries:[],workouts:[],weight:null,water:0,photos:[]},d)};
@@ -130,6 +131,7 @@ async function addPhoto(file){
     const blob=await shrinkPhoto(file),id=uid(),name=t.date+'-'+t.kind+'-'+id+'.jpg';
     await store.put('photos',id,{name:name,blob:blob,driveId:null,deleted:false});
     photoUrls[id]=URL.createObjectURL(blob);
+    if(t.kind!=='progress')state.open[t.kind]=true;
     mutateDay(t.date,x=>{x.photos=(x.photos||[]).concat({id:id,kind:t.kind,name:name})});
     if(t.kind!=='progress'&&state.hasKey)readPhoto(t.date,id);
     else toast(t.kind==='progress'||state.hasKey?'Photo added':'Photo saved. Add a Claude API key in Settings to log calories from photos.');
@@ -284,29 +286,32 @@ function waterCard(day){
 }
 
 function macroPills(t,goal){
-  const kc=t.kcal,mp=t.p*4,mc=t.c*4,mf=t.f*9,ms=mp+mc+mf||1;
+  const kc=t.kcal,mp=t.p*4,mc=t.c*4,mf=t.f*9,ms=mp+mc+mf,pc=x=>ms?Math.round(x/ms*100)+'% of calories':'';
   const items=[
-    ['Cal',nf0.format(kc),goal?kc/goal:0],
-    ['Prot',nf1.format(t.p),mp/ms],
-    ['Carb',nf1.format(t.c),mc/ms],
-    ['Fat',nf1.format(t.f),mf/ms],
-    ['Fiber',nf1.format(t.fi),t.fi/FIBER_REF]
+    ['Calories',nf0.format(kc)+' kcal',goal?'of '+nf0.format(goal):'',goal?kc/goal:0,'cal'],
+    ['Protein',nf1.format(t.p)+' g',pc(mp),ms?mp/ms:0,'p'],
+    ['Carbs',nf1.format(t.c)+' g',pc(mc),ms?mc/ms:0,'c'],
+    ['Fat',nf1.format(t.f)+' g',pc(mf),ms?mf/ms:0,'f'],
+    ['Fiber',nf1.format(t.fi)+' g','of '+FIBER_REF+' g',t.fi/FIBER_REF,'fi']
   ];
-  return '<section class="macros" aria-label="Macros today">'+items.map(it=>{
-    const h=Math.round(38+Math.min(1,it[2])*62);
-    return '<div class="mp"><div class="t"><div class="f" style="height:'+h+'%"><div class="v">'+it[1]+'</div></div></div><span class="n">'+it[0]+'</span></div>';
-  }).join('')+'</section>';
+  return '<section class="tile macros" aria-label="Totals for this day">'+items.map(it=>
+    '<div class="mb '+it[4]+'"><div class="mrow"><span class="n">'+it[0]+'</span><span class="v"><b>'+it[1]+'</b>'+(it[2]?' <small>'+it[2]+'</small>':'')+'</span></div><div class="bar" role="presentation"><i style="width:'+Math.round(Math.min(1,it[3])*100)+'%"></i></div></div>'
+  ).join('')+'</section>';
 }
 
 function mealCard(m,day){
   const es=day.entries.filter(e=>e.meal===m[0]),t=totals({entries:es});
   const icon=m[0]==='breakfast'?ICON.sun:m[0]==='lunch'?ICON.bowl:m[0]==='dinner'?ICON.moon:ICON.apple;
   let h='<section class="tile '+m[2]+' meal"><div class="mh"><span class="ticon" aria-hidden="true">'+icon+'</span><div class="ttl"><h3>'+m[1]+'</h3><small>'+(es.length?nf0.format(t.kcal)+' calories':'Nothing logged yet')+'</small></div>'+cameraBtn(m[0],m[1])+'<button class="plus" data-act="add" data-meal="'+m[0]+'" aria-label="Add food to '+m[1]+'">'+ICON.plus+'</button></div>';
+  const ps=(day.photos||[]).filter(p=>p.kind===m[0]),open=!!state.open[m[0]];
   if(es.length){
     h+='<div class="mstats"><div><span>Protein</span><b>'+nf1.format(t.p)+'</b></div><div><span>Fats</span><b>'+nf1.format(t.f)+'</b></div><div><span>Carbs</span><b>'+nf1.format(t.c)+'</b></div><div><span>Fiber</span><b>'+nf1.format(t.fi)+'</b></div></div>';
-    h+='<div class="entries">'+es.map(entryRow).join('')+'</div>';
   }
-  h+=photoStrip(state.date,m[0],m[1]);
+  if(es.length||ps.length){
+    const what=[es.length?es.length+(es.length===1?' item':' items'):'',ps.length?ps.length+(ps.length===1?' photo':' photos'):''].filter(Boolean).join(' · ');
+    h+='<button class="more" data-act="togglemeal" data-meal="'+m[0]+'" aria-expanded="'+open+'">'+(open?'Hide':'Show')+' '+what+'<span class="chev'+(open?' up':'')+'" aria-hidden="true">'+ICON.chev+'</span></button>';
+    if(open)h+=(es.length?'<div class="entries">'+es.map(entryRow).join('')+'</div>':'')+photoStrip(state.date,m[0],m[1]);
+  }
   return h+'</section>';
 }
 
@@ -355,9 +360,15 @@ function viewToday(){
 
   for(const m of MEALS)h+=mealCard(m,day);
 
-  // weigh-in
-  const w=day.weight;
-  h+='<section class="tile grey"><div class="thead"><h3 class="sec">Weigh-in</h3>'+cameraBtn('progress','progress')+'</div>'+photoStrip(date,'progress','Progress')+'<form style="margin-top:12px" class="stackf" data-submit="saveweight"><div class="grid2"><div class="field"><label for="wkg">Weight (kg)</label><input id="wkg" type="number" inputmode="decimal" step="0.1" min="20" max="300" value="'+dv('wkg',w?w.kg:'')+'"></div><div class="field"><label for="wnote">Note</label><input id="wnote" type="text" maxlength="60" placeholder="Fasted, morning" value="'+dv('wnote',w?w.note||'':'')+'"></div></div><div class="actions"><button class="btn" type="submit">Save weigh-in</button>'+(w?'<button class="btn ghost" type="button" data-act="delweight">Remove</button><span class="saved">Saved: '+nf1.format(w.kg)+' kg</span>':'')+'</div></form></section>';
+  // weigh-in: one fasted morning reading per day
+  const w=day.weight,editing=!w||state.weightEdit;
+  h+='<section class="tile grey weigh"><div class="thead"><h3 class="sec">'+(isToday?'Today\'s weigh-in':'Weigh-in, '+fmtShort(date))+'</h3>'+cameraBtn('progress','progress')+'</div>';
+  if(editing){
+    h+='<form class="wform" data-submit="saveweight"><div class="field"><label for="wkg">Weight (kg)</label><input id="wkg" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="'+(wi?nf1.format(wi.last.kg):'kg')+'" value="'+dv('wkg',w?w.kg:'')+'"></div><button class="btn" type="submit">Save</button>'+(w?'<button class="btn ghost" type="button" data-act="weightedit">Cancel</button>':'')+'</form>';
+  }else{
+    h+='<div class="wdone"><span class="ok" aria-hidden="true">✓</span><div><b class="num">'+nf1.format(w.kg)+' kg</b><small>'+(isToday?'Done for today':'Logged')+'</small></div><button class="link" data-act="weightedit">Edit</button><button class="link danger" data-act="delweight">Remove</button></div>';
+  }
+  h+=photoStrip(date,'progress','Progress')+'</section>';
 
   // workouts
   h+='<section class="tile grey"><h3 class="sec">Workouts</h3>';
@@ -632,9 +643,11 @@ function act(name,el){
   const d=(el&&el.dataset)||{};
   switch(name){
     case 'tab':state.view=d.tab;state.confirmDel=null;renderAll();window.scrollTo(0,0);break;
-    case 'week':state.date=addDays(state.date,Number(d.n));state.draft={};state.goalEdit=false;renderMain();break;
-    case 'pick':state.date=d.d;state.draft={};state.goalEdit=false;renderMain();break;
+    case 'week':state.date=addDays(state.date,Number(d.n));state.draft={};state.goalEdit=false;state.weightEdit=false;renderMain();break;
+    case 'pick':state.date=d.d;state.draft={};state.goalEdit=false;state.weightEdit=false;renderMain();break;
     case 'today':state.date=todayStr();state.draft={};if(state.view!=='today'){state.view='today';renderAll()}else renderMain();window.scrollTo(0,0);break;
+    case 'togglemeal':state.open[d.meal]=!state.open[d.meal];renderMain();break;
+    case 'weightedit':state.weightEdit=!state.weightEdit;renderMain();if(state.weightEdit&&$('wkg'))$('wkg').focus();break;
     case 'goaledit':state.goalEdit=!state.goalEdit;renderMain();if(state.goalEdit&&$('goal'))$('goal').focus();break;
     case 'savegoal':{const v=parseInt(gv('goal'),10);if(!(v>=500&&v<=10000)){toast('Enter a goal between 500 and 10,000 kcal.');break}setSetting('goalKcal',v);state.goalEdit=false;delete state.draft.goal;renderMain();break}
     case 'cleargoal':setSetting('goalKcal',null);state.goalEdit=false;delete state.draft.goal;renderMain();break;
@@ -670,12 +683,11 @@ function act(name,el){
     case 'saveweight':{
       const kg=num('wkg');
       if(!(kg>=20&&kg<=300)){toast('Enter your weight in kg, for example 55.4.');break}
-      const note=gv('wnote').trim();
-      mutateDay(state.date,x=>{x.weight={kg:Math.round(kg*10)/10,note:note}});
-      delete state.draft.wkg;delete state.draft.wnote;renderMain();toast('Weigh-in saved');break}
+      mutateDay(state.date,x=>{x.weight={kg:Math.round(kg*10)/10,note:x.weight&&x.weight.note||''}});
+      delete state.draft.wkg;state.weightEdit=false;renderMain();toast('Weigh-in saved');break}
     case 'delweight':{
       const date=state.date,prev=clone(getDay(date).weight);
-      mutateDay(date,x=>{x.weight=null});delete state.draft.wkg;delete state.draft.wnote;renderMain();
+      mutateDay(date,x=>{x.weight=null});delete state.draft.wkg;state.weightEdit=false;renderMain();
       toast('Weigh-in removed',()=>mutateDay(date,x=>{x.weight=prev}));break}
     case 'savesleep':{
       const score=num('sscore'),h=nz(num('sh')),m=nz(num('sm')),wk=num('swake'),mins=Math.round(h*60+m);

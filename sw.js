@@ -1,6 +1,6 @@
 // Offline support: keeps the app's own files on the phone so it opens without a connection.
 // Only same-origin files are cached. Requests to Google are never cached here.
-const CACHE = 'health-tracker-v5';
+const CACHE = 'health-tracker-v6';
 const SHELL = [
   './', 'index.html', 'manifest.webmanifest',
   'src/styles.css', 'src/app.js', 'src/store.js', 'src/drive.js', 'src/ai.js', 'src/config.js',
