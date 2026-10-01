@@ -809,7 +809,13 @@ async function init(){
   state.loaded={foods:true,days:true,settings:true};
   renderAll();
   if(!state.demo){
-    if('serviceWorker' in navigator)navigator.serviceWorker.register('sw.js').catch(()=>{});
+    if('serviceWorker' in navigator){
+      // When a new version takes over, reload once so the new code runs.
+      const hadController=!!navigator.serviceWorker.controller;
+      let reloaded=false;
+      navigator.serviceWorker.addEventListener('controllerchange',()=>{if(hadController&&!reloaded){reloaded=true;location.reload()}});
+      navigator.serviceWorker.register('sw.js',{updateViaCache:'none'}).then(r=>r.update()).catch(()=>{});
+    }
     if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{});
     runSync();
   }
