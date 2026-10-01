@@ -20,6 +20,8 @@ const plural=(l,n)=>n===1?l:(/s$/.test(l)?l:l+'s');
 const litres=ml=>nf2.format(ml/1000);
 
 const ICON={
+  dumbbell:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6.5 7v10M3.5 9.5v5M17.5 7v10M20.5 9.5v5M6.5 12h11"/></svg>',
+  bed:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6v13M3 15h18M21 19v-6a3 3 0 0 0-3-3h-7v5"/><circle cx="7" cy="11.5" r="1.6"/></svg>',
   chev:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>',
   sun:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2.5v2M12 19.5v2M2.5 12h2M19.5 12h2M5.3 5.3l1.4 1.4M17.3 17.3l1.4 1.4M5.3 18.7l1.4-1.4M17.3 6.7l1.4-1.4"/></svg>',
   bowl:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 11h16a8 8 0 0 1-16 0z"/><path d="M9 7c0-1.5 1-2 1-3.5M13 7c0-1.5 1-2 1-3.5"/></svg>',
@@ -200,6 +202,7 @@ function photoStrip(date,kind,label){
     return '<div class="ph"><img data-photo="'+esc(p.id)+'" data-name="'+esc(p.name)+'" alt="'+esc(label)+' photo '+(i+1)+'"><span class="wait">Loading</span><button class="open" data-act="viewphoto" data-id="'+esc(p.id)+'" aria-label="Open '+esc(label)+' photo '+(i+1)+'"></button>'+(busy?'<span class="busy" role="status">Reading…</span>':'')+(canRead?'<button class="read" data-act="readphoto" data-id="'+esc(p.id)+'">'+(p.ai==='failed'?'Retry':'Read')+'</button>':'')+'<button class="x" data-act="rmphoto" data-id="'+esc(p.id)+'" aria-label="'+(confirm?'Tap again to delete':'Delete')+' '+esc(label)+' photo '+(i+1)+'">'+(confirm?'✓':'×')+'</button></div>';
   }).join('')+'</div>';
 }
+function cardHead(icon,title,sub,extra){return '<div class="mh"><span class="ticon" aria-hidden="true">'+icon+'</span><div class="ttl"><h3>'+title+'</h3><small>'+sub+'</small></div>'+(extra||'')+'</div>'}
 function cameraBtn(kind,label){return '<button class="camera" data-act="photo" data-kind="'+kind+'" aria-label="Add a '+esc(label)+' photo">'+ICON.camera+'</button>'}
 function renderViewer(){
   const el=$('viewer');
@@ -362,7 +365,7 @@ function viewToday(){
 
   // weigh-in: one fasted morning reading per day
   const w=day.weight,editing=!w||state.weightEdit;
-  h+='<section class="tile grey weigh"><div class="thead"><h3 class="sec">'+(isToday?'Today\'s weigh-in':'Weigh-in, '+fmtShort(date))+'</h3>'+cameraBtn('progress','progress')+'</div>';
+  h+='<section class="tile rose weigh card">'+cardHead(ICON.scale,isToday?'Today\'s weigh-in':'Weigh-in','Fasted, first thing in the morning',cameraBtn('progress','progress'));
   if(editing){
     h+='<form class="wform" data-submit="saveweight"><div class="field"><label for="wkg">Weight (kg)</label><input id="wkg" type="number" inputmode="decimal" step="0.1" min="20" max="300" placeholder="'+(wi?nf1.format(wi.last.kg):'kg')+'" value="'+dv('wkg',w?w.kg:'')+'"></div><button class="btn" type="submit">Save</button>'+(w?'<button class="btn ghost" type="button" data-act="weightedit">Cancel</button>':'')+'</form>';
   }else{
@@ -371,7 +374,7 @@ function viewToday(){
   h+=photoStrip(date,'progress','Progress')+'</section>';
 
   // workouts
-  h+='<section class="tile grey"><h3 class="sec">Workouts</h3>';
+  h+='<section class="tile peach card">'+cardHead(ICON.dumbbell,'Workouts',day.workouts.length?nf0.format(wmin)+' min · '+day.workouts.length+(day.workouts.length===1?' session':' sessions'):'Nothing logged yet');
   if(day.workouts.length){
     h+='<div class="entries" style="margin:0 0 12px">'+day.workouts.map(x=>'<div class="entry"><div class="nm">'+esc(x.type)+(x.note?'<div class="amt">'+esc(x.note)+'</div>':'')+'</div><span class="kc">'+nf0.format(x.min)+'<small> min</small></span><button class="x" data-act="rmworkout" data-id="'+esc(x.id)+'" aria-label="Remove '+esc(x.type)+'">×</button></div>').join('')+'</div>';
   }
@@ -379,7 +382,7 @@ function viewToday(){
 
   // sleep
   const sl=day.sleep,slh=sl?Math.floor(sl.minutes/60):'',slm=sl?sl.minutes%60:'';
-  h+='<section class="tile grey"><h3 class="sec">Sleep</h3><form class="stackf" data-submit="savesleep"><div class="grid2"><div class="field"><label for="sscore">Sleep score (0 to 100)</label><input id="sscore" type="number" inputmode="numeric" min="0" max="100" step="1" value="'+dv('sscore',sl?sl.score:'')+'"></div><div class="field"><label for="swake">Wake-ups, optional</label><input id="swake" type="number" inputmode="numeric" min="0" max="99" step="1" value="'+dv('swake',sl&&sl.wakeups!=null?sl.wakeups:'')+'"></div></div><div class="grid2"><div class="field"><label for="sh">Hours asleep</label><input id="sh" type="number" inputmode="numeric" min="0" max="24" step="1" value="'+dv('sh',slh)+'"></div><div class="field"><label for="sm">Minutes</label><input id="sm" type="number" inputmode="numeric" min="0" max="59" step="1" value="'+dv('sm',slm)+'"></div></div><div class="actions"><button class="btn" type="submit">Save sleep</button>'+(sl?'<button class="btn ghost" type="button" data-act="delsleep">Remove</button><span class="saved">Saved: '+sl.score+' · '+fmtDur(sl.minutes)+'</span>':'')+'</div><p class="cap" style="margin:0">Log the night that ended on this date.</p></form></section>';
+  h+='<section class="tile lilac card">'+cardHead(ICON.bed,'Sleep',sl?'Score '+sl.score+' · '+fmtDur(sl.minutes):'The night that ended on this date')+'<form class="stackf" data-submit="savesleep"><div class="grid2"><div class="field"><label for="sscore">Sleep score (0 to 100)</label><input id="sscore" type="number" inputmode="numeric" min="0" max="100" step="1" value="'+dv('sscore',sl?sl.score:'')+'"></div><div class="field"><label for="swake">Wake-ups, optional</label><input id="swake" type="number" inputmode="numeric" min="0" max="99" step="1" value="'+dv('swake',sl&&sl.wakeups!=null?sl.wakeups:'')+'"></div></div><div class="grid2"><div class="field"><label for="sh">Hours asleep</label><input id="sh" type="number" inputmode="numeric" min="0" max="24" step="1" value="'+dv('sh',slh)+'"></div><div class="field"><label for="sm">Minutes</label><input id="sm" type="number" inputmode="numeric" min="0" max="59" step="1" value="'+dv('sm',slm)+'"></div></div><div class="actions"><button class="btn" type="submit">Save sleep</button>'+(sl?'<button class="btn ghost" type="button" data-act="delsleep">Remove</button><span class="saved">Saved: '+sl.score+' · '+fmtDur(sl.minutes)+'</span>':'')+'</div></form></section>';
   return h;
 }
 

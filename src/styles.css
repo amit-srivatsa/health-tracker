@@ -6,6 +6,7 @@
   --bg:#F5F5F2; --surface:#FFFFFF; --tile:#F0F0EC; --ink:#151615; --muted:#6E716C; --line:#E4E4DF;
   --blue:#BFE3EB; --blue-deep:#7CC3D3; --green:#D2EABD; --green-deep:#9ACB78; --yellow:#F6EE8E; --yellow-deep:#E7D84A;
   --peach:#F8C4A0; --lilac:#D9C6F0;
+  --t-rose:#F7D3DD; --t-peach:#FBDCC6; --t-lilac:#E3D6F4;
   --on-pastel:#151615; --ring-track:rgba(255,255,255,.75);
   --good:#2E7D4F; --warn:#B36A12; --danger:#B3261E;
   --scrim:rgba(20,22,20,.4);
@@ -18,6 +19,7 @@
     --bg:#111312; --surface:#1B1E1C; --tile:#222623; --ink:#EEF0EC; --muted:#9BA19A; --line:#2E332F;
     --blue:#24434A; --blue-deep:#5FAFC2; --green:#2A3F22; --green-deep:#86BD62; --yellow:#433F17; --yellow-deep:#D9C93E;
     --peach:#E59A6B; --lilac:#9C82C2;
+    --t-rose:#47282F; --t-peach:#4A3122; --t-lilac:#352B47;
     --on-pastel:#EEF0EC; --ring-track:rgba(255,255,255,.14);
     --good:#6FCF97; --warn:#E3A64A; --danger:#F2877F;
     --scrim:rgba(0,0,0,.6);
@@ -28,6 +30,7 @@
   --bg:#111312; --surface:#1B1E1C; --tile:#222623; --ink:#EEF0EC; --muted:#9BA19A; --line:#2E332F;
   --blue:#24434A; --blue-deep:#5FAFC2; --green:#2A3F22; --green-deep:#86BD62; --yellow:#433F17; --yellow-deep:#D9C93E;
   --peach:#E59A6B; --lilac:#9C82C2;
+    --t-rose:#47282F; --t-peach:#4A3122; --t-lilac:#352B47;
   --on-pastel:#EEF0EC; --ring-track:rgba(255,255,255,.14);
   --good:#6FCF97; --warn:#E3A64A; --danger:#F2877F;
   --scrim:rgba(0,0,0,.6);
@@ -77,6 +80,10 @@ small{font-size:13px;color:var(--muted)}
 .tile.blue{background:var(--blue);color:var(--on-pastel)}
 .tile.green{background:var(--green);color:var(--on-pastel)}
 .tile.yellow{background:var(--yellow);color:var(--on-pastel)}
+.tile.rose{background:var(--t-rose);color:var(--on-pastel)}
+.tile.peach{background:var(--t-peach);color:var(--on-pastel)}
+.tile.lilac{background:var(--t-lilac);color:var(--on-pastel)}
+.card .mh{margin-bottom:14px}
 .tlabel{font-size:15px;font-weight:600;line-height:1.2}
 .ticon{width:38px;height:38px;border-radius:50%;background:var(--surface);display:grid;place-items:center;color:var(--ink)}
 .ticon svg{width:18px;height:18px}
@@ -148,15 +155,15 @@ small{font-size:13px;color:var(--muted)}
 .weigh .wdone{display:flex;align-items:center;gap:12px;margin-top:4px}
 .weigh .wdone>div{flex:1}
 .weigh .wdone b{display:block;font-family:var(--font-display);font-size:22px}
-.weigh .wdone small{color:var(--good);font-weight:600;font-size:14px}
+.weigh .wdone small{font-weight:600;font-size:14px;opacity:.75}
 .weigh .ok{width:36px;height:36px;border-radius:50%;background:var(--green);display:grid;place-items:center;font-weight:800;color:var(--on-pastel)}
 .weigh .photos{margin-top:12px}
 
 /* meals */
-.meal .mh{display:flex;align-items:center;gap:12px}
-.meal .mh .ttl{flex:1;min-width:0}
-.meal h3{font-size:19px}
-.meal .mh small{color:inherit;opacity:.75}
+.mh{display:flex;align-items:center;gap:12px}
+.mh .ttl{flex:1;min-width:0}
+.mh h3{font-size:19px}
+.mh small{color:inherit;opacity:.75}
 .plus{width:44px;height:44px;border-radius:50%;border:0;background:var(--surface);display:grid;place-items:center;color:var(--ink)}
 .plus svg{width:20px;height:20px}
 .mstats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:14px}
