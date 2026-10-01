@@ -1,0 +1,28 @@
+# Personal data must never be committed. The app stores it on the device and in Google Drive.
+exports/
+*.export.json
+health-tracker-export-*.json
+data/
+photos/
+*.jpg
+*.jpeg
+*.heic
+*.heif
+*.mov
+*.mp4
+
+# Secrets and local config (this app needs none, but just in case)
+.env
+.env.*
+*.pem
+*.key
+client_secret*.json
+credentials*.json
+token*.json
+
+# Tooling
+node_modules/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

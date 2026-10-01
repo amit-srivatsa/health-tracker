@@ -1,0 +1,2563 @@
+{
+ "note": "Invented demo data. Not a real person's log.",
+ "settings": {
+  "v": 1,
+  "name": "Sam",
+  "goalKcal": 2100
+ },
+ "foods": {
+  "greek-yogurt-demo": {
+   "name": "Greek yogurt",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 97,
+    "p": 9,
+    "c": 3.6,
+    "f": 5,
+    "fi": 0
+   },
+   "servings": [
+    {
+     "label": "bowl",
+     "amount": 150
+    }
+   ]
+  },
+  "oats-demo": {
+   "name": "Rolled oats",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 372,
+    "p": 13.5,
+    "c": 58.7,
+    "f": 7,
+    "fi": 10
+   },
+   "servings": [
+    {
+     "label": "portion",
+     "amount": 50
+    }
+   ]
+  },
+  "banana-demo": {
+   "name": "Banana",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 89,
+    "p": 1.1,
+    "c": 22.8,
+    "f": 0.3,
+    "fi": 2.6
+   },
+   "servings": [
+    {
+     "label": "banana",
+     "amount": 120
+    }
+   ]
+  },
+  "dal-demo": {
+   "name": "Toor dal, cooked",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 118,
+    "p": 7,
+    "c": 19,
+    "f": 1.5,
+    "fi": 4
+   },
+   "servings": [
+    {
+     "label": "katori",
+     "amount": 150
+    }
+   ]
+  },
+  "rice-demo": {
+   "name": "Basmati rice, cooked",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 130,
+    "p": 2.7,
+    "c": 28,
+    "f": 0.3,
+    "fi": 0.4
+   },
+   "servings": [
+    {
+     "label": "cup",
+     "amount": 160
+    }
+   ]
+  },
+  "chicken-demo": {
+   "name": "Chicken breast, grilled",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 165,
+    "p": 31,
+    "c": 0,
+    "f": 3.6,
+    "fi": 0
+   },
+   "servings": []
+  },
+  "almonds-demo": {
+   "name": "Almonds",
+   "brand": "",
+   "unit": "g",
+   "per100": {
+    "kcal": 579,
+    "p": 21,
+    "c": 21.6,
+    "f": 49.9,
+    "fi": 12.5
+   },
+   "servings": [
+    {
+     "label": "handful",
+     "amount": 25
+    }
+   ]
+  },
+  "milk-demo": {
+   "name": "Semi-skimmed milk",
+   "brand": "",
+   "unit": "ml",
+   "per100": {
+    "kcal": 46,
+    "p": 3.4,
+    "c": 4.8,
+    "f": 1.5,
+    "fi": 0
+   },
+   "servings": [
+    {
+     "label": "glass",
+     "amount": 250
+    }
+   ]
+  }
+ },
+ "days": [
+  {
+   "daysAgo": 20,
+   "entries": [
+    {
+     "id": "demo1",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo2",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo3",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo4",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo5",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w20",
+     "type": "Walk",
+     "min": 30,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 78.5,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 88,
+    "minutes": 460
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 19,
+   "entries": [
+    {
+     "id": "demo6",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo7",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo8",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo9",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo10",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 297.0,
+     "p": 55.8,
+     "c": 0.0,
+     "f": 6.5,
+     "fi": 0.0
+    },
+    {
+     "id": "demo11",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo12",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo13",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 71,
+    "minutes": 454
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 18,
+   "entries": [
+    {
+     "id": "demo14",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo15",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo16",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 200,
+     "unit": "g",
+     "kcal": 260.0,
+     "p": 5.4,
+     "c": 56.0,
+     "f": 0.6,
+     "fi": 0.8
+    },
+    {
+     "id": "demo17",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 198.0,
+     "p": 37.2,
+     "c": 0.0,
+     "f": 4.3,
+     "fi": 0.0
+    },
+    {
+     "id": "demo18",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo19",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo20",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w18",
+     "type": "Run",
+     "min": 30,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 78.4,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 70,
+    "minutes": 453
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 17,
+   "entries": [
+    {
+     "id": "demo21",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo22",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo23",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo24",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo25",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo26",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo27",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo28",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w17",
+     "type": "Walk",
+     "min": 45,
+     "note": ""
+    }
+   ],
+   "weight": null,
+   "sleep": {
+    "score": 78,
+    "minutes": 468
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 16,
+   "entries": [
+    {
+     "id": "demo29",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo30",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo31",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo32",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo33",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 200,
+     "unit": "g",
+     "kcal": 260.0,
+     "p": 5.4,
+     "c": 56.0,
+     "f": 0.6,
+     "fi": 0.8
+    },
+    {
+     "id": "demo34",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo35",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo36",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": {
+    "kg": 78.1,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 77,
+    "minutes": 471
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 15,
+   "entries": [
+    {
+     "id": "demo37",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo38",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo39",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo40",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo41",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo42",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 70,
+    "minutes": 401
+   },
+   "water": 3500
+  },
+  {
+   "daysAgo": 14,
+   "entries": [
+    {
+     "id": "demo43",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo44",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo45",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo46",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo47",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 234.0,
+     "p": 4.9,
+     "c": 50.4,
+     "f": 0.5,
+     "fi": 0.7
+    },
+    {
+     "id": "demo48",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 297.0,
+     "p": 55.8,
+     "c": 0.0,
+     "f": 6.5,
+     "fi": 0.0
+    },
+    {
+     "id": "demo49",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo50",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo51",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w14",
+     "type": "Run",
+     "min": 20,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 78.1,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 83,
+    "minutes": 486
+   },
+   "water": 3500
+  },
+  {
+   "daysAgo": 13,
+   "entries": [
+    {
+     "id": "demo52",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo53",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo54",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo55",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo56",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo57",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo58",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo59",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo60",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 82,
+    "minutes": 495
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 12,
+   "entries": [
+    {
+     "id": "demo61",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo62",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo63",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo64",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo65",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 200,
+     "unit": "g",
+     "kcal": 260.0,
+     "p": 5.4,
+     "c": 56.0,
+     "f": 0.6,
+     "fi": 0.8
+    },
+    {
+     "id": "demo66",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo67",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo68",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w12",
+     "type": "Walk",
+     "min": 45,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 78.0,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 87,
+    "minutes": 383
+   },
+   "water": 4250
+  },
+  {
+   "daysAgo": 11,
+   "entries": [
+    {
+     "id": "demo69",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo70",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo71",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo72",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo73",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo74",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo75",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo76",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w11",
+     "type": "Run",
+     "min": 20,
+     "note": ""
+    }
+   ],
+   "weight": null,
+   "sleep": {
+    "score": 78,
+    "minutes": 474
+   },
+   "water": 2250
+  },
+  {
+   "daysAgo": 10,
+   "entries": [
+    {
+     "id": "demo77",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo78",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo79",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo80",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 234.0,
+     "p": 4.9,
+     "c": 50.4,
+     "f": 0.5,
+     "fi": 0.7
+    },
+    {
+     "id": "demo81",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 297.0,
+     "p": 55.8,
+     "c": 0.0,
+     "f": 6.5,
+     "fi": 0.0
+    },
+    {
+     "id": "demo82",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo83",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": {
+    "kg": 77.8,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 76,
+    "minutes": 446
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 9,
+   "entries": [
+    {
+     "id": "demo84",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo85",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo86",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo87",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo88",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo89",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo90",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo91",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo92",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 75,
+    "minutes": 405
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 8,
+   "entries": [
+    {
+     "id": "demo93",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo94",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo95",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo96",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo97",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 234.0,
+     "p": 4.9,
+     "c": 50.4,
+     "f": 0.5,
+     "fi": 0.7
+    },
+    {
+     "id": "demo98",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo99",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo100",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo101",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": {
+    "kg": 77.7,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 70,
+    "minutes": 408
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 7,
+   "entries": [
+    {
+     "id": "demo102",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo103",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo104",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo105",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo106",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo107",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo108",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo109",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 80,
+    "minutes": 480
+   },
+   "water": 2250
+  },
+  {
+   "daysAgo": 6,
+   "entries": [
+    {
+     "id": "demo110",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo111",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo112",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo113",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo114",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 247.5,
+     "p": 46.5,
+     "c": 0.0,
+     "f": 5.4,
+     "fi": 0.0
+    },
+    {
+     "id": "demo115",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo116",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    }
+   ],
+   "workouts": [],
+   "weight": {
+    "kg": 77.6,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 68,
+    "minutes": 399
+   },
+   "water": 4250
+  },
+  {
+   "daysAgo": 5,
+   "entries": [
+    {
+     "id": "demo117",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo118",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo119",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo120",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo121",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 234.0,
+     "p": 4.9,
+     "c": 50.4,
+     "f": 0.5,
+     "fi": 0.7
+    },
+    {
+     "id": "demo122",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 297.0,
+     "p": 55.8,
+     "c": 0.0,
+     "f": 6.5,
+     "fi": 0.0
+    },
+    {
+     "id": "demo123",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo124",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 84,
+    "minutes": 475
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 4,
+   "entries": [
+    {
+     "id": "demo125",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo126",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo127",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo128",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo129",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 234.0,
+     "p": 4.9,
+     "c": 50.4,
+     "f": 0.5,
+     "fi": 0.7
+    },
+    {
+     "id": "demo130",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 198.0,
+     "p": 37.2,
+     "c": 0.0,
+     "f": 4.3,
+     "fi": 0.0
+    },
+    {
+     "id": "demo131",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo132",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo133",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w4",
+     "type": "Yoga",
+     "min": 60,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 77.3,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 84,
+    "minutes": 396
+   },
+   "water": 2750
+  },
+  {
+   "daysAgo": 3,
+   "entries": [
+    {
+     "id": "demo134",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo135",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo136",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo137",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo138",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo139",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 180,
+     "unit": "g",
+     "kcal": 297.0,
+     "p": 55.8,
+     "c": 0.0,
+     "f": 6.5,
+     "fi": 0.0
+    },
+    {
+     "id": "demo140",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo141",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo142",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w3",
+     "type": "Yoga",
+     "min": 20,
+     "note": ""
+    }
+   ],
+   "weight": null,
+   "sleep": {
+    "score": 85,
+    "minutes": 387
+   },
+   "water": 4000
+  },
+  {
+   "daysAgo": 2,
+   "entries": [
+    {
+     "id": "demo143",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo144",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 195.0,
+     "p": 4.1,
+     "c": 42.0,
+     "f": 0.4,
+     "fi": 0.6
+    },
+    {
+     "id": "demo145",
+     "meal": "dinner",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 156.0,
+     "p": 3.2,
+     "c": 33.6,
+     "f": 0.4,
+     "fi": 0.5
+    },
+    {
+     "id": "demo146",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo147",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [
+    {
+     "id": "w2",
+     "type": "Yoga",
+     "min": 30,
+     "note": ""
+    }
+   ],
+   "weight": {
+    "kg": 77.3,
+    "note": "Morning"
+   },
+   "sleep": {
+    "score": 90,
+    "minutes": 446
+   },
+   "water": 2750
+  },
+  {
+   "daysAgo": 1,
+   "entries": [
+    {
+     "id": "demo148",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo149",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo150",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo151",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo152",
+     "meal": "dinner",
+     "foodId": "chicken-demo",
+     "name": "Chicken breast, grilled",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 198.0,
+     "p": 37.2,
+     "c": 0.0,
+     "f": 4.3,
+     "fi": 0.0
+    },
+    {
+     "id": "demo153",
+     "meal": "snacks",
+     "foodId": "almonds-demo",
+     "name": "Almonds",
+     "amount": 25,
+     "unit": "g",
+     "kcal": 144.8,
+     "p": 5.2,
+     "c": 5.4,
+     "f": 12.5,
+     "fi": 3.1
+    },
+    {
+     "id": "demo154",
+     "meal": "snacks",
+     "foodId": "greek-yogurt-demo",
+     "name": "Greek yogurt",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 145.5,
+     "p": 13.5,
+     "c": 5.4,
+     "f": 7.5,
+     "fi": 0.0
+    }
+   ],
+   "workouts": [],
+   "weight": null,
+   "sleep": {
+    "score": 72,
+    "minutes": 500
+   },
+   "water": 3000
+  },
+  {
+   "daysAgo": 0,
+   "entries": [
+    {
+     "id": "demo155",
+     "meal": "breakfast",
+     "foodId": "oats-demo",
+     "name": "Rolled oats",
+     "amount": 50,
+     "unit": "g",
+     "kcal": 186.0,
+     "p": 6.8,
+     "c": 29.4,
+     "f": 3.5,
+     "fi": 5.0
+    },
+    {
+     "id": "demo156",
+     "meal": "breakfast",
+     "foodId": "milk-demo",
+     "name": "Semi-skimmed milk",
+     "amount": 200,
+     "unit": "ml",
+     "kcal": 92.0,
+     "p": 6.8,
+     "c": 9.6,
+     "f": 3.0,
+     "fi": 0.0
+    },
+    {
+     "id": "demo157",
+     "meal": "breakfast",
+     "foodId": "banana-demo",
+     "name": "Banana",
+     "amount": 120,
+     "unit": "g",
+     "kcal": 106.8,
+     "p": 1.3,
+     "c": 27.4,
+     "f": 0.4,
+     "fi": 3.1
+    },
+    {
+     "id": "demo158",
+     "meal": "lunch",
+     "foodId": "dal-demo",
+     "name": "Toor dal, cooked",
+     "amount": 150,
+     "unit": "g",
+     "kcal": 177.0,
+     "p": 10.5,
+     "c": 28.5,
+     "f": 2.2,
+     "fi": 6.0
+    },
+    {
+     "id": "demo159",
+     "meal": "lunch",
+     "foodId": "rice-demo",
+     "name": "Basmati rice, cooked",
+     "amount": 200,
+     "unit": "g",
+     "kcal": 260.0,
+     "p": 5.4,
+     "c": 56.0,
+     "f": 0.6,
+     "fi": 0.8
+    }
+   ],
+   "workouts": [],
+   "weight": {
+    "kg": 77.2,
+    "note": "Morning"
+   },
+   "sleep": null,
+   "water": 2000
+  }
+ ]
+}
