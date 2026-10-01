@@ -2,6 +2,7 @@
 // user's own Google Drive (drive.js). Nothing personal lives in this code.
 import * as store from './store.js';
 import * as drive from './drive.js';
+import * as ai from './ai.js';
 
 const MEALS=[['breakfast','Breakfast','green'],['lunch','Lunch','blue'],['dinner','Dinner','yellow'],['snacks','Snacks','grey']];
 const WTYPES=['Walk','Run','Cycling','Strength','Yoga','Swim','HIIT','Sports'];
@@ -46,7 +47,7 @@ function fmtShort(s){return parse(s).toLocaleDateString('en-GB',{day:'numeric',m
 function fmtDur(m){return Math.floor(m/60)+'h '+(m%60)+'m'}
 function monday(s){const d=parse(s),k=(d.getDay()+6)%7;return addDays(s,-k)}
 
-const state={foods:{},days:{},settings:{},loaded:{foods:false,days:false,settings:false},view:'today',date:todayStr(),demo:false,sheet:null,goalEdit:false,waterEdit:false,confirmDel:null,foodQuery:'',draft:{},undo:null,sync:{status:'idle',pending:0,last:null,error:null},photoTarget:null,viewer:null};
+const state={foods:{},days:{},settings:{},loaded:{foods:false,days:false,settings:false},view:'today',date:todayStr(),demo:false,sheet:null,goalEdit:false,waterEdit:false,confirmDel:null,foodQuery:'',draft:{},undo:null,sync:{status:'idle',pending:0,last:null,error:null},photoTarget:null,viewer:null,hasKey:false};
 
 const emptyDay=date=>({date:date,entries:[],workouts:[],weight:null,sleep:null,water:0,photos:[]});
 const getDay=date=>{const d=state.days[date];if(!d)return emptyDay(date);return Object.assign({entries:[],workouts:[],weight:null,water:0,photos:[]},d)};
@@ -117,7 +118,8 @@ async function addPhoto(file){
     await store.put('photos',id,{name:name,blob:blob,driveId:null,deleted:false});
     photoUrls[id]=URL.createObjectURL(blob);
     mutateDay(t.date,x=>{x.photos=(x.photos||[]).concat({id:id,kind:t.kind,name:name})});
-    toast('Photo added');
+    if(t.kind!=='progress'&&state.hasKey)readPhoto(t.date,id);
+    else toast(t.kind==='progress'||state.hasKey?'Photo added':'Photo saved. Add a Claude API key in Settings to log calories from photos.');
   }catch(e){toast('Could not read that photo. Try another one.')}
 }
 async function removePhoto(date,id){
@@ -129,6 +131,34 @@ async function removePhoto(date,id){
   await store.put('photos',id,{name:p.name,blob:null,driveId:cur?cur.driveId:null,deleted:true});
   if(photoUrls[id]){URL.revokeObjectURL(photoUrls[id]);delete photoUrls[id]}
   scheduleSync();
+}
+async function photoBlob(p){
+  const cur=await store.get('photos',p.id);
+  if(cur&&cur.blob)return cur.blob;
+  if(drive.token()&&navigator.onLine){try{return await drive.fetchPhoto(p.id,p.name)}catch(e){return null}}
+  return null;
+}
+const reading=new Set();
+function setPhotoAi(date,id,v){mutateDay(date,x=>{x.photos=(x.photos||[]).map(y=>y.id===id?Object.assign({},y,{ai:v}):y)})}
+async function readPhoto(date,id){
+  const p=(getDay(date).photos||[]).find(x=>x.id===id);
+  if(!p||reading.has(id))return;
+  reading.add(id);renderMain();
+  try{
+    const blob=await photoBlob(p);
+    if(!blob)throw new ai.ReadError('This photo is not on this phone yet. Sync, then try again.');
+    const mealName=(MEALS.find(m=>m[0]===p.kind)||[0,'meal'])[1].toLowerCase();
+    const res=await ai.readMeal(blob,mealName,state.foods);
+    const items=res.items.filter(it=>it&&it.name&&isFinite(it.kcal)&&it.kcal>=0);
+    if(!items.length){setPhotoAi(date,id,'none');toast(res.note||'No food found in that photo.');return}
+    const added=items.map(it=>({id:uid(),meal:p.kind,foodId:it.food_id&&state.foods[it.food_id]?it.food_id:null,name:String(it.name).slice(0,60),amount:r1(nz(it.amount)),unit:it.unit==='ml'?'ml':'g',kcal:r1(nz(it.kcal)),p:r1(nz(it.protein_g)),c:r1(nz(it.carbs_g)),f:r1(nz(it.fat_g)),fi:r1(nz(it.fiber_g)),photoId:id}));
+    mutateDay(date,x=>{x.entries=x.entries.concat(added);x.photos=(x.photos||[]).map(y=>y.id===id?Object.assign({},y,{ai:'done'}):y)});
+    const kc=added.reduce((a,e)=>a+e.kcal,0),ids=added.map(e=>e.id);
+    toast('Added '+added.length+(added.length===1?' item, ':' items, ')+nf0.format(kc)+' kcal',()=>mutateDay(date,x=>{x.entries=x.entries.filter(e=>ids.indexOf(e.id)<0);x.photos=(x.photos||[]).map(y=>y.id===id?Object.assign({},y,{ai:'undone'}):y)}));
+  }catch(e){
+    setPhotoAi(date,id,'failed');
+    toast(e instanceof ai.ReadError?e.message:'Could not read that photo. Try again.');
+  }finally{reading.delete(id);renderMain()}
 }
 async function photoUrl(p){
   if(photoUrls[p.id])return photoUrls[p.id];
@@ -151,7 +181,8 @@ function photoStrip(date,kind,label){
   if(!ps.length)return '';
   return '<div class="photos">'+ps.map((p,i)=>{
     const confirm=state.confirmDel==='ph:'+p.id;
-    return '<div class="ph"><img data-photo="'+esc(p.id)+'" data-name="'+esc(p.name)+'" alt="'+esc(label)+' photo '+(i+1)+'"><span class="wait">Loading</span><button class="open" data-act="viewphoto" data-id="'+esc(p.id)+'" aria-label="Open '+esc(label)+' photo '+(i+1)+'"></button><button class="x" data-act="rmphoto" data-id="'+esc(p.id)+'" aria-label="'+(confirm?'Tap again to delete':'Delete')+' '+esc(label)+' photo '+(i+1)+'">'+(confirm?'✓':'×')+'</button></div>';
+    const busy=reading.has(p.id),canRead=kind!=='progress'&&state.hasKey&&!busy&&p.ai!=='done';
+    return '<div class="ph"><img data-photo="'+esc(p.id)+'" data-name="'+esc(p.name)+'" alt="'+esc(label)+' photo '+(i+1)+'"><span class="wait">Loading</span><button class="open" data-act="viewphoto" data-id="'+esc(p.id)+'" aria-label="Open '+esc(label)+' photo '+(i+1)+'"></button>'+(busy?'<span class="busy" role="status">Reading…</span>':'')+(canRead?'<button class="read" data-act="readphoto" data-id="'+esc(p.id)+'">'+(p.ai==='failed'?'Retry':'Read')+'</button>':'')+'<button class="x" data-act="rmphoto" data-id="'+esc(p.id)+'" aria-label="'+(confirm?'Tap again to delete':'Delete')+' '+esc(label)+' photo '+(i+1)+'">'+(confirm?'✓':'×')+'</button></div>';
   }).join('')+'</div>';
 }
 function cameraBtn(kind,label){return '<button class="camera" data-act="photo" data-kind="'+kind+'" aria-label="Add a '+esc(label)+' photo">'+ICON.camera+'</button>'}
@@ -190,7 +221,7 @@ async function importFile(file){
 const notice='<div class="banner" role="status">Demo mode with invented data. Nothing you change here is saved. <a href="./">Open the real app</a></div>';
 
 function entryRow(e){
-  const amt=e.unit==='serving'?'Quick add':nf1.format(e.amount)+' '+esc(e.unit);
+  const amt=(e.unit==='serving'?'Quick add':nf1.format(e.amount)+' '+esc(e.unit))+(e.photoId?' · from photo':'');
   return '<div class="entry"><div class="nm">'+esc(e.name)+'<div class="amt">'+amt+'</div></div><span class="kc">'+nf0.format(e.kcal)+'<small> kcal</small></span><button class="x" data-act="rmentry" data-id="'+esc(e.id)+'" aria-label="Remove '+esc(e.name)+'">×</button></div>';
 }
 
@@ -536,6 +567,10 @@ function settingsHtml(){
     h+='<p class="cap" style="margin:0 0 12px">'+line+(s.pending?' <b>'+s.pending+'</b> '+(s.pending===1?'change':'changes')+' waiting to upload.':' Everything is uploaded.')+'</p><div class="actions"><button class="btn" data-act="syncnow">Sync now</button><button class="link danger" data-act="disconnect">Disconnect</button></div>';
   }
   h+='</section>';
+  h+='<section class="tile"><h3 class="sec">Calories from photos</h3>';
+  if(state.hasKey)h+='<p class="cap" style="margin:0 0 12px">On. Meal photos are sent to Claude, which adds the foods and calories to that meal. Your API key is saved on this phone only.</p><div class="actions"><button class="link danger" data-act="removekey">Remove key</button></div>';
+  else h+='<p class="cap" style="margin:0 0 12px">Paste an API key from console.anthropic.com to log meals from a photo. Give it its own key with a monthly spend limit. The key stays on this phone only, and meal photos are sent to Claude to be read.</p><form class="stackf" data-submit="savekey"><div class="field"><label for="setkey">Claude API key</label><input id="setkey" type="password" autocomplete="off" spellcheck="false" placeholder="sk-ant-..."></div><div class="actions"><button class="btn" type="submit">Save key</button></div></form>';
+  h+='</section>';
   h+='<section class="tile"><h3 class="sec">Backup</h3><p class="cap" style="margin:0 0 12px">Save everything you logged as one JSON file, or bring in an export from another copy of the app. Photos stay in your Drive and are not part of the file.</p><div class="actions"><button class="btn ghost" data-act="export">Export all</button><button class="btn ghost" data-act="import">Import a file</button></div></section>';
   return h;
 }
@@ -665,6 +700,12 @@ function act(name,el){
       runSync();break;
     case 'disconnect':drive.disconnect().then(()=>{state.sync.status='idle';renderHeader();renderSheet();toast('Disconnected. Your Drive files are untouched.')});break;
     case 'export':exportAll();break;
+    case 'savekey':{
+      const k=gv('setkey').trim();
+      if(!/^sk-ant-[A-Za-z0-9_-]{20,}$/.test(k)){toast('That does not look like a Claude API key (it starts with sk-ant-).');break}
+      ai.setKey(k).then(()=>{state.hasKey=true;renderSheet();renderMain();toast('Key saved on this phone')});break}
+    case 'removekey':ai.setKey('').then(()=>{state.hasKey=false;renderSheet();renderMain();toast('Key removed from this phone')});break;
+    case 'readphoto':readPhoto(state.date,d.id);break;
     case 'import':$('importInput').click();break;
     case 'photo':state.photoTarget={date:state.date,kind:d.kind};$('photoInput').click();break;
     case 'rmphoto':
@@ -763,7 +804,7 @@ async function init(){
   renderAll();
   try{
     if(state.demo)await loadDemo();
-    else Object.assign(state,await store.loadState());
+    else{Object.assign(state,await store.loadState());state.hasKey=!!(await ai.getKey())}
   }catch(e){toast(state.demo?'Could not load the demo data.':'Could not open storage on this device. Private browsing can block it.')}
   state.loaded={foods:true,days:true,settings:true};
   renderAll();

@@ -258,3 +258,5 @@ form.stackf{display:flex;flex-direction:column;gap:12px}
 .banner{background:var(--lilac);color:var(--on-pastel);border-radius:var(--r-md);padding:12px 14px;font-size:14px}
 body{padding-top:calc(16px + env(safe-area-inset-top,0px))}
 .avatar{border:0;padding:0;cursor:pointer}
+.ph .busy{position:absolute;inset:0;display:grid;place-items:center;background:rgba(0,0,0,.45);color:#fff;font-size:12px;font-weight:700}
+.ph .read{position:absolute;left:4px;bottom:4px;border:0;border-radius:999px;background:var(--ink);color:var(--bg);font-size:12px;font-weight:700;min-height:28px;padding:0 10px}

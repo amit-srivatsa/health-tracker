@@ -22,6 +22,7 @@ A private, installable tracker for calories, macros, water, workouts, sleep, wei
 
   Two devices can share the same Drive: each record carries a timestamp and the newer copy wins.
 - **Photos** are shrunk on the phone (max 1600 px) and re-encoded, which also strips EXIF data such as GPS location.
+- **Calories from a photo (optional).** Paste your own Claude API key in Settings and every meal photo is read by Claude (`claude-opus-5-5`), which adds each food with its portion, calories and macros to that meal. One tap undoes it. It prefers your saved foods and reads nutrition labels.
 - **Backup.** Settings > Export all saves one JSON file. Import brings it back.
 
 ## Privacy and security
@@ -31,8 +32,10 @@ A private, installable tracker for calories, macros, water, workouts, sleep, wei
 | Drive access | `drive.file` scope only: the app sees files it created, nothing else in your Drive |
 | Secrets | None exist. Browser apps have no client secret. The OAuth client ID is public by design and only works from the origins set in Google Cloud |
 | Sign-in token | Kept on your device for about an hour, never sent anywhere except Google |
-| Third parties | No analytics or trackers. Fonts are self-hosted. A Content Security Policy blocks every network call except Google's Drive and sign-in APIs |
+| Third parties | No analytics or trackers. Fonts are self-hosted. A Content Security Policy blocks every network call except Google's Drive and sign-in APIs and, for photo reading, Anthropic's API |
 | Sharing | The app never changes sharing on your Drive files |
+| Claude API key | Optional. Pasted in Settings, stored on the phone only (IndexedDB), never synced to Drive or committed. Use a dedicated key with a monthly spend limit |
+| Meal photos and Claude | Only when you add a key: each meal photo (resized to 1280 px) is sent to Anthropic's API to be read. Progress photos are never sent |
 | Repo | Secret scanning on every push (gitleaks), and a `.gitignore` that blocks exports and photos |
 
 Revoke access any time at [myaccount.google.com/permissions](https://myaccount.google.com/permissions). Your files stay in your Drive.
@@ -63,12 +66,14 @@ sw.js                   offline cache
 src/app.js              UI
 src/store.js            device storage (IndexedDB)
 src/drive.js            Google sign-in and Drive sync
+src/ai.js               photo reading with Claude (optional)
 src/config.js           public OAuth client ID
+vendor/                 Anthropic TypeScript SDK, bundled for the browser (MIT)
 demo/sample-data.json   invented data for the demo
 ```
 
 ## Licence
 
-MIT. Fonts (Manrope, Figtree) are under the SIL Open Font License 1.1.
+MIT. Fonts (Manrope, Figtree) are under the SIL Open Font License 1.1. The bundled Anthropic SDK is MIT (see `vendor/`).
 
 Built by [Amit Srivatsa](https://github.com/amit-srivatsa) with Claude.
