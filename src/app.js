@@ -109,6 +109,19 @@ async function shrinkPhoto(file){
   c.getContext('2d').drawImage(bmp,0,0,c.width,c.height);
   return new Promise((res,rej)=>c.toBlob(b=>b?res(b):rej(new Error('encode')),'image/jpeg',0.82));
 }
+// The profile picture is a small image kept in settings, so it syncs through Drive like the name.
+const avatarSrc=()=>{const a=state.settings.avatar;return typeof a==='string'&&/^data:image\/(png|jpeg|webp);base64,[A-Za-z0-9+/=]+$/.test(a)?a:null};
+async function setAvatar(file){
+  if(!file)return;
+  try{
+    let bmp;
+    try{bmp=await createImageBitmap(file,{imageOrientation:'from-image'})}catch(e){bmp=await createImageBitmap(file)}
+    const side=Math.min(bmp.width,bmp.height),c=document.createElement('canvas');c.width=c.height=160;
+    c.getContext('2d').drawImage(bmp,(bmp.width-side)/2,(bmp.height-side)/2,side,side,0,0,160,160);
+    setSetting('avatar',c.toDataURL('image/png'));
+    renderHeader();renderSheet();toast('Picture saved');
+  }catch(e){toast('That picture could not be opened.')}
+}
 async function addPhoto(file){
   const t=state.photoTarget;state.photoTarget=null;
   if(!t||!file)return;
@@ -497,7 +510,9 @@ function renderMain(){
 function renderHeader(){
   const name=(state.settings.name||'').trim();
   $('hello').textContent=name?'Hello, '+name+'!':'Hello!';
-  $('avatar').textContent=name?name.charAt(0).toUpperCase():'☺';
+  const av=$('avatar'),pic=avatarSrc();
+  if(pic){av.textContent='';const im=document.createElement('img');im.src=pic;im.alt='';av.appendChild(im)}
+  else av.textContent=name?name.charAt(0).toUpperCase():'☺';
   $('hdate').textContent=fmtLong(todayStr());
   const p=$('syncpill'),s=state.sync;
   let txt='',cls='';
@@ -556,6 +571,7 @@ function sheetHtml(){
 function settingsHtml(){
   const s=state.sync,dv=(id,def)=>esc(id in state.draft?state.draft[id]:def);
   let h='<section class="tile"><h3 class="sec">Your name</h3><form class="stackf" data-submit="savename"><div class="field"><label for="setname">Shown in the greeting. Saved in your Drive, not in the app code.</label><input id="setname" type="text" maxlength="30" autocomplete="given-name" value="'+dv('setname',state.settings.name||'')+'"></div><div class="actions"><button class="btn" type="submit">Save name</button></div></form></section>';
+  h+='<section class="tile"><h3 class="sec">Your picture</h3><p class="cap" style="margin:0 0 12px">Shown in the circle next to your name. Saved in your Drive, not in the app code.</p><div class="actions"><button class="btn ghost" data-act="pickavatar">'+(avatarSrc()?'Change picture':'Choose picture')+'</button>'+(avatarSrc()?'<button class="link danger" data-act="removeavatar">Remove</button>':'')+'</div></section>';
   h+='<section class="tile"><h3 class="sec">Google Drive</h3>';
   if(state.demo)h+='<p class="cap" style="margin:0">Drive is off in demo mode.</p>';
   else if(!drive.configured())h+='<p class="cap" style="margin:0">This copy of the app has no Google client ID yet, so your log stays on this device. See the README to add one.</p>';
@@ -707,6 +723,8 @@ function act(name,el){
     case 'removekey':ai.setKey('').then(()=>{state.hasKey=false;renderSheet();renderMain();toast('Key removed from this phone')});break;
     case 'readphoto':readPhoto(state.date,d.id);break;
     case 'import':$('importInput').click();break;
+    case 'pickavatar':$('avatarInput').click();break;
+    case 'removeavatar':setSetting('avatar',null);renderHeader();renderSheet();toast('Picture removed');break;
     case 'photo':state.photoTarget={date:state.date,kind:d.kind};$('photoInput').click();break;
     case 'rmphoto':
       if(state.confirmDel==='ph:'+d.id){state.confirmDel=null;removePhoto(state.date,d.id);toast('Photo deleted')}
@@ -775,6 +793,7 @@ document.addEventListener('change',e=>{
   const t=e.target;
   if(t.id==='sMeal'&&state.sheet)state.sheet.meal=t.value;
   else if(t.id==='photoInput'){const f=t.files&&t.files[0];t.value='';addPhoto(f)}
+  else if(t.id==='avatarInput'){const f=t.files&&t.files[0];t.value='';setAvatar(f)}
   else if(t.id==='importInput'){const f=t.files&&t.files[0];t.value='';if(f)importFile(f)}
 });
 document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(state.viewer){state.viewer=null;renderViewer()}else if(state.sheet)closeSheet()}});
